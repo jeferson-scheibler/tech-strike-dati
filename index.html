@@ -758,6 +758,55 @@ footer a { color: var(--blue-bright); text-decoration: none; }
 }
 .glitch:hover::before { opacity: .6; }
 
+/* ── LOGOS ── */
+#hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.nav-dati-logo {
+  height: 24px;
+  width: auto;
+  opacity: .85;
+  filter: drop-shadow(0 0 5px rgba(59,142,245,.5));
+  margin-right: .4rem;
+  vertical-align: middle;
+}
+
+.hero-logo-img {
+  display: block;
+  max-width: min(420px, 88vw);
+  margin: 0 auto 1.8rem;
+  opacity: 0;
+  animation: fadeUp .7s .15s forwards;
+  -webkit-mask-image: radial-gradient(ellipse 88% 68% at 50% 50%, black 42%, transparent 86%);
+  mask-image: radial-gradient(ellipse 88% 68% at 50% 50%, black 42%, transparent 86%);
+  filter: drop-shadow(0 0 28px rgba(59,142,245,.6)) drop-shadow(0 0 8px rgba(0,229,255,.25));
+}
+
+.dati-logo-section {
+  display: block;
+  height: 56px;
+  width: auto;
+  opacity: .65;
+  filter: drop-shadow(0 0 8px rgba(59,142,245,.35));
+  margin: 0 auto 1.2rem;
+}
+
+.footer-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+.footer-logos img { height: 36px; width: auto; opacity: .5; filter: drop-shadow(0 0 4px rgba(59,142,245,.3)); }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 600px) {
   .nav-links { display: none; }
@@ -772,7 +821,7 @@ footer a { color: var(--blue-bright); text-decoration: none; }
 
 <!-- NAV -->
 <nav>
-  <a href="#hero" class="nav-logo">TECH<span>STRIKE</span></a>
+  <a href="#hero" class="nav-logo"><img src="logotipo-dati.svg" alt="DATI" class="nav-dati-logo">TECH<span>STRIKE</span></a>
   <ul class="nav-links">
     <li><a href="#inscricoes">Inscrições</a></li>
     <li><a href="#formato">Formato</a></li>
@@ -784,12 +833,14 @@ footer a { color: var(--blue-bright); text-decoration: none; }
 
 <!-- HERO -->
 <section id="hero">
+  <canvas id="hero-canvas"></canvas>
   <div class="hero-glow"></div>
   <div class="hero-corner hero-corner--tl"></div>
   <div class="hero-corner hero-corner--tr"></div>
   <div class="hero-corner hero-corner--bl"></div>
   <div class="hero-corner hero-corner--br"></div>
   <div class="hero-inner">
+    <img src="logotipo-tech-strike.png" alt="Tech Strike — Univates" class="hero-logo-img">
     <p class="hero-eyebrow">DATI — Univates &nbsp;|&nbsp; Campeonato Oficial</p>
     <h1 class="hero-title" data-text="TECH STRIKE">
       <span class="tech-word">TECH</span><span class="strike">STRIKE</span>
@@ -810,6 +861,7 @@ footer a { color: var(--blue-bright); text-decoration: none; }
 <!-- APRESENTAÇÃO -->
 <section class="section reveal" id="apresentacao">
   <div class="section-label">01 — Apresentação</div>
+  <img src="logotipo-dati.svg" alt="DATI" class="dati-logo-section">
   <h2 class="section-title">O <span class="accent">Campeonato</span></h2>
   <p style="margin-bottom:1.2rem">
     O presente regulamento contém as diretrizes e regras aplicáveis ao <strong style="color:var(--silver)">TECH STRIKE</strong>, campeonato de Counter‑Strike 2 promovido pelo <strong style="color:var(--silver)">Diretório Acadêmico de Tecnologia da Informação (DATI)</strong> da Universidade do Vale do Taquari — Univates, com sede na Av. Avelino Talini, 171 — Universitário, Lajeado/RS.
@@ -1291,6 +1343,9 @@ footer a { color: var(--blue-bright); text-decoration: none; }
 
 <!-- FOOTER -->
 <footer>
+  <div class="footer-logos">
+    <img src="logotipo-dati.svg" alt="DATI">
+  </div>
   <p>TECH STRIKE &nbsp;·&nbsp; DATI — Univates &nbsp;·&nbsp; Lajeado/RS</p>
   <p style="margin-top:.4rem;font-size:.65rem;color:var(--text-muted)">
     regulamento versão 1.0 &nbsp;·&nbsp; gerado via DATI &nbsp;·&nbsp;
@@ -1538,6 +1593,153 @@ if (prizeRow) {
     }
   });
 }
+
+// ── HERO CANVAS — HUD animation ──
+(function () {
+  const cv  = document.getElementById('hero-canvas');
+  if (!cv) return;
+  const ctx = cv.getContext('2d');
+  let W, H, cx, cy;
+
+  function resize() {
+    W = cv.width  = cv.offsetWidth;
+    H = cv.height = cv.offsetHeight;
+    cx = W / 2; cy = H / 2;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Expanding pulse rings
+  const rings = Array.from({length: 7}, (_, i) => ({
+    r: i * 48,
+    speed: 0.38,
+    blue: i % 2 === 0,
+  }));
+  const MAX_R = 340;
+
+  // Floating particles
+  const pts = Array.from({length: 38}, () => mkPt());
+  function mkPt() {
+    return { x: Math.random() * 3000, y: Math.random() * 1200 + 200,
+             vx: (Math.random() - .5) * .35, vy: -(Math.random() * .45 + .1),
+             r: Math.random() * 1.4 + .4, a: Math.random() * .18 + .04 };
+  }
+
+  // Tracer flashes
+  const flashes = [];
+  let fTick = 0;
+
+  // Scope rotation
+  let scopeA = 0;
+
+  function drawScope() {
+    ctx.save();
+    ctx.translate(cx, cy);
+
+    // Rotating dashed ring
+    ctx.rotate(scopeA);
+    ctx.beginPath();
+    ctx.arc(0, 0, 190, 0, Math.PI * 2);
+    ctx.setLineDash([6, 22]);
+    ctx.strokeStyle = 'rgba(59,142,245,.07)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Tick marks
+    for (let i = 0; i < 16; i++) {
+      const a = (i / 16) * Math.PI * 2;
+      const r0 = i % 4 === 0 ? 170 : 178;
+      ctx.beginPath();
+      ctx.moveTo(Math.cos(a) * r0, Math.sin(a) * r0);
+      ctx.lineTo(Math.cos(a) * 190, Math.sin(a) * 190);
+      ctx.strokeStyle = `rgba(59,142,245,${i % 4 === 0 ? .14 : .06})`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+    ctx.restore();
+
+    // Static crosshair lines (gap at center so text is clear)
+    ctx.strokeStyle = 'rgba(59,142,245,.055)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(cx - 260, cy); ctx.lineTo(cx - 48, cy);
+    ctx.moveTo(cx + 48,  cy); ctx.lineTo(cx + 260, cy);
+    ctx.moveTo(cx, cy - 260); ctx.lineTo(cx, cy - 48);
+    ctx.moveTo(cx, cy + 48);  ctx.lineTo(cx, cy + 260);
+    ctx.stroke();
+
+    // Small corner brackets on the inner gap
+    const B = 14, G = 48;
+    ctx.strokeStyle = 'rgba(0,229,255,.18)';
+    ctx.lineWidth = 1;
+    [[cx-G, cy-G, 1, 1],[cx+G, cy-G, -1, 1],[cx-G, cy+G, 1, -1],[cx+G, cy+G, -1, -1]].forEach(([x,y,sx,sy]) => {
+      ctx.beginPath();
+      ctx.moveTo(x, y); ctx.lineTo(x + sx*B, y);
+      ctx.moveTo(x, y); ctx.lineTo(x, y + sy*B);
+      ctx.stroke();
+    });
+
+    // Centre dot
+    ctx.beginPath();
+    ctx.arc(cx, cy, 2.5, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(0,229,255,.25)';
+    ctx.fill();
+  }
+
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+    scopeA += .0025;
+
+    // Rings
+    rings.forEach(ring => {
+      ring.r += ring.speed;
+      if (ring.r > MAX_R) ring.r = 0;
+      const a = (1 - ring.r / MAX_R) * .17;
+      ctx.beginPath();
+      ctx.arc(cx, cy, ring.r, 0, Math.PI * 2);
+      ctx.strokeStyle = ring.blue ? `rgba(59,142,245,${a})` : `rgba(0,229,255,${a * .7})`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    });
+
+    drawScope();
+
+    // Particles
+    pts.forEach((p, i) => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.y < -10) pts[i] = {...mkPt(), x: Math.random() * W, y: H + 10};
+      ctx.beginPath();
+      ctx.arc(((p.x % W) + W) % W, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(59,142,245,${p.a})`;
+      ctx.fill();
+    });
+
+    // Tracer flashes
+    fTick++;
+    if (fTick > 80 + Math.random() * 100 && flashes.length < 4) {
+      flashes.push({ x: -220, y: Math.random() * H,
+                     speed: 7 + Math.random() * 11,
+                     len: 70 + Math.random() * 130,
+                     a: .055 + Math.random() * .055 });
+      fTick = 0;
+    }
+    for (let i = flashes.length - 1; i >= 0; i--) {
+      const f = flashes[i];
+      f.x += f.speed;
+      if (f.x > W + f.len) { flashes.splice(i, 1); continue; }
+      const g = ctx.createLinearGradient(f.x - f.len, 0, f.x + f.len, 0);
+      g.addColorStop(0, 'transparent');
+      g.addColorStop(.5, `rgba(0,229,255,${f.a})`);
+      g.addColorStop(1, 'transparent');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, f.y - 1, W, 2);
+    }
+
+    requestAnimationFrame(frame);
+  }
+  frame();
+}());
 
 // ── EASTER EGG 7: Sequence de teclas "ace" ──
 let aceBuffer = '';
