@@ -791,8 +791,8 @@ footer a { color: var(--blue-bright); text-decoration: none; }
   <div class="hero-corner hero-corner--br"></div>
   <div class="hero-inner">
     <p class="hero-eyebrow">DATI — Univates &nbsp;|&nbsp; Campeonato Oficial</p>
-    <h1 class="hero-title glitch" data-text="TECH STRIKE">
-      TECH<span class="strike">STRIKE</span>
+    <h1 class="hero-title" data-text="TECH STRIKE">
+      <span class="tech-word">TECH</span><span class="strike">STRIKE</span>
     </h1>
     <p class="hero-sub">Counter‑Strike 2 &nbsp;·&nbsp; Univates</p>
     <div class="hero-badge">REGULAMENTO OFICIAL</div>
@@ -1412,18 +1412,71 @@ document.addEventListener('keypress', e => {
   }
 });
 
-// ── EASTER EGG 4: título pisca com glitch em hover ──
-let glitchTimer;
-document.querySelector('.hero-title').addEventListener('mouseenter', function() {
-  this.style.animation = 'none';
-  glitchTimer = setInterval(() => {
-    this.style.color = Math.random() > .5 ? 'var(--cyan)' : 'var(--white)';
-  }, 80);
-});
-document.querySelector('.hero-title').addEventListener('mouseleave', function() {
-  clearInterval(glitchTimer);
-  this.style.color = 'var(--white)';
-});
+// ── HERO TITLE EFFECTS ──
+(function () {
+  const titleEl  = document.querySelector('.hero-title');
+  const techEl   = document.querySelector('.hero-title .tech-word');
+  const strikeEl = document.querySelector('.hero-title .strike');
+  const CHARS    = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@$%^*!?';
+  const GLOW     = '0 0 30px rgba(59,142,245,.45), 0 0 80px rgba(59,142,245,.12)';
+
+  // Scramble: decodes on entry, as if the system is loading the name
+  setTimeout(() => {
+    const FRAMES = 32;
+    let f = 0;
+    const rnd = () => CHARS[~~(Math.random() * CHARS.length)];
+    const tick = setInterval(() => {
+      const t = Math.floor(f / FRAMES * 4);
+      const s = Math.floor(f / FRAMES * 6);
+      techEl.textContent   = 'TECH'.split('').map((c, i)   => i < t ? c : rnd()).join('');
+      strikeEl.textContent = 'STRIKE'.split('').map((c, i) => i < s ? c : rnd()).join('');
+      if (++f > FRAMES) {
+        clearInterval(tick);
+        techEl.textContent   = 'TECH';
+        strikeEl.textContent = 'STRIKE';
+        titleEl.style.textShadow = GLOW;
+      }
+    }, 38);
+  }, 1100);
+
+  // Hover: chromatic aberration (RGB split)
+  let hoverTimer = null;
+  const hoverFrames = [
+    `-5px 0 rgba(0,229,255,.9), 5px 0 rgba(255,59,59,.9), ${GLOW}`,
+    ` 6px 0 rgba(0,229,255,.8),-6px 0 rgba(255,59,59,.8), ${GLOW}`,
+    `-4px 2px rgba(0,229,255,.85), 4px -2px rgba(255,59,59,.85), ${GLOW}`,
+    ` 7px -1px rgba(0,229,255,.7),-7px 1px rgba(255,59,59,.7), ${GLOW}`,
+    `-3px 0 rgba(0,229,255,.9), 3px 0 rgba(255,59,59,.9), ${GLOW}`,
+  ];
+  titleEl.addEventListener('mouseenter', function () {
+    let tick = 0;
+    hoverTimer = setInterval(() => {
+      this.style.textShadow = hoverFrames[tick++ % hoverFrames.length];
+    }, 75);
+  });
+  titleEl.addEventListener('mouseleave', function () {
+    clearInterval(hoverTimer);
+    hoverTimer = null;
+    this.style.textShadow = GLOW;
+  });
+
+  // Idle auto-glitch every 7 seconds
+  setInterval(() => {
+    if (hoverTimer) return;
+    const seq = [
+      `-4px 0 rgba(0,229,255,.7), 4px 0 rgba(255,59,59,.7), ${GLOW}`,
+      ` 5px 1px rgba(0,229,255,.6),-5px -1px rgba(255,59,59,.6), ${GLOW}`,
+      `-6px 0 rgba(0,229,255,.5), 6px 0 rgba(255,59,59,.5), ${GLOW}`,
+      GLOW,
+    ];
+    let i = 0;
+    const t = setInterval(() => {
+      if (hoverTimer) { clearInterval(t); return; }
+      titleEl.style.textShadow = seq[i++];
+      if (i >= seq.length) clearInterval(t);
+    }, 65);
+  }, 7000);
+}());
 
 // ── EASTER EGG 5: cursor trail com pontos (ativado clicando 3× no logo) ──
 let logoClicks = 0;
