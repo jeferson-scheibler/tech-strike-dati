@@ -838,16 +838,107 @@ footer a { color: var(--blue-bright); text-decoration: none; }
 <!-- INSCRIÇÕES -->
 <section class="section reveal" id="inscricoes">
   <div class="section-label">02 — Inscrições</div>
-  <h2 class="section-title">Requisitos & <span class="accent">Inscrições</span></h2>
+  <h2 class="section-title">Inscrições & <span class="accent">Equipe</span></h2>
+
+  <div class="panel reveal">
+    <div class="panel-title">Canal de Inscrições</div>
+    <p style="margin-bottom:1rem">Todas as inscrições são realizadas exclusivamente pelo <strong style="color:var(--silver)">servidor do Discord do evento</strong>. Acesse o canal <strong style="color:var(--cyan)">#como-se-inscrever</strong> e escolha uma das três modalidades:</p>
+    <div class="cards-grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr))">
+      <div class="card">
+        <div class="card-icon">👑</div>
+        <div class="card-title">Sou Capitão</div>
+        <div class="card-text">Crie e lidere sua equipe. O capitão é o primeiro a se inscrever.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🤝</div>
+        <div class="card-title">Já tenho equipe</div>
+        <div class="card-text">Fui convidado por um capitão e quero entrar na equipe dele.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔍</div>
+        <div class="card-title">Sou Free Agent</div>
+        <div class="card-text">Quero participar sem equipe formada e aguardar recrutamento.</div>
+      </div>
+    </div>
+    <div style="margin-top:1.4rem;padding:.9rem 1.2rem;background:rgba(0,229,255,.05);border:1px solid rgba(0,229,255,.2);border-left:3px solid var(--cyan)">
+      <p style="font-family:'Share Tech Mono',monospace;font-size:.78rem;color:var(--cyan);letter-spacing:.08em">
+        &gt; Acesse o Discord do evento: <a href="[LINK DO DISCORD]" target="_blank" style="color:var(--blue-bright);text-decoration:underline">[LINK DO DISCORD]</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="panel reveal">
+    <div class="panel-title">Inscrição como Capitão</div>
+    <p style="margin-bottom:.9rem;font-size:.9rem">O capitão é o responsável pela equipe e deve ser o <strong>primeiro a se inscrever</strong>. Ao clicar em <strong style="color:var(--cyan)">Sou Capitão</strong>, preenche um formulário com:</p>
+    <ul class="reg-list">
+      <li>Nome completo e curso</li>
+      <li>Patente atual no CS2 e horas de jogo por semana</li>
+      <li><strong>Nome da equipe</strong> — único, exato e definitivo</li>
+    </ul>
+    <p style="margin-top:.9rem;font-size:.85rem;color:var(--text-dim)">Após o envio, o capitão recebe as instruções de pagamento via mensagem privada e deve compartilhar o <strong style="color:var(--silver)">nome exato da equipe</strong> com seus jogadores.</p>
+  </div>
+
+  <div class="panel reveal">
+    <div class="panel-title">Inscrição como Membro</div>
+    <p style="margin-bottom:.9rem;font-size:.9rem">O jogador com equipe definida clica em <strong style="color:var(--cyan)">Já tenho equipe</strong> e preenche:</p>
+    <ul class="reg-list">
+      <li>Nome completo e curso</li>
+      <li>Patente atual no CS2 e horas de jogo por semana</li>
+      <li><strong>Nome exato da equipe</strong> conforme cadastrado pelo capitão</li>
+    </ul>
+    <p style="margin-top:.9rem;font-size:.85rem;color:var(--text-dim)">O pedido é encaminhado ao capitão, que pode <strong style="color:var(--green-ok)">aceitar</strong> ou <strong style="color:var(--red)">recusar</strong>. O jogador é notificado por mensagem privada e, em caso de aceitação, recebe as instruções de pagamento.</p>
+    <div style="margin-top:.9rem;padding:.7rem 1rem;background:rgba(245,166,35,.06);border-left:2px solid var(--gold)">
+      <p style="font-size:.82rem;color:var(--gold)">⚠ O nome da equipe deve ser informado exatamente como cadastrado pelo capitão, incluindo maiúsculas e espaços.</p>
+    </div>
+  </div>
+
+  <div class="panel reveal">
+    <div class="panel-title">Inscrição como Free Agent</div>
+    <p style="margin-bottom:.9rem;font-size:.9rem">Jogadores sem equipe formada preenchem:</p>
+    <ul class="reg-list">
+      <li>Nome completo e curso</li>
+      <li>Patente atual no CS2 e horas de jogo por semana</li>
+      <li>Estilo de jogo e posição preferida</li>
+    </ul>
+    <p style="margin-top:.9rem;font-size:.85rem;color:var(--text-dim)">O perfil fica visível no canal <strong style="color:var(--cyan)">#free-agents</strong>, onde os capitães podem entrar em contato para recrutamento. Caso seja recrutado, o jogador completa a inscrição normalmente pelo botão <strong>Já tenho equipe</strong>.</p>
+  </div>
+
+  <div class="panel reveal">
+    <div class="panel-title">Pagamento</div>
+    <ul class="reg-list">
+      <li>Valor: <strong style="color:var(--gold)">R$ 20,00 por jogador</strong> (capitão e membros pagam individualmente)</li>
+      <li>Método: <strong>PIX</strong> — QR Code e dados enviados automaticamente por mensagem privada no momento da inscrição</li>
+      <li>Enviar comprovante para o usuário <strong style="color:var(--cyan)">@jeferson.scheibler</strong> no Discord</li>
+      <li>Pagamento confirmado manualmente pela organização após verificação do comprovante</li>
+      <li><strong style="color:var(--red)">Não haverá reembolso</strong> após a confirmação do pagamento</li>
+      <li>Máximo <strong>16 equipes</strong>, por ordem de inscrição com pagamento confirmado</li>
+    </ul>
+  </div>
+
+  <div class="panel reveal">
+    <div class="panel-title">Liberação dos Canais da Equipe</div>
+    <p style="margin-bottom:.9rem;font-size:.9rem">Os canais exclusivos (<strong style="color:var(--cyan)">#equipe-geral</strong>, <strong style="color:var(--cyan)">#equipe-estrategia</strong> e canal de voz) são criados automaticamente quando o <strong>pagamento do capitão</strong> for confirmado.</p>
+    <ul class="reg-list">
+      <li>Membros têm acesso liberado individualmente conforme seus pagamentos são confirmados</li>
+      <li>Quando <strong>todos os membros</strong> tiverem o pagamento confirmado, a equipe é considerada <strong style="color:var(--green-ok)">oficialmente inscrita</strong></li>
+      <li>Menos de <strong>8 equipes inscritas</strong> pode resultar em cancelamento ou reformatação do torneio</li>
+    </ul>
+  </div>
 
   <div class="panel reveal">
     <div class="panel-title">Composição da Equipe</div>
-    <ul class="reg-list">
-      <li><strong>5 jogadores titulares</strong> + 1 reserva opcional</li>
+    <table class="format-table" style="margin-top:.5rem">
+      <thead><tr><th>Slot</th><th>Função</th></tr></thead>
+      <tbody>
+        <tr><td>J1</td><td>Capitão <span class="tag">OBRIGATÓRIO</span></td></tr>
+        <tr><td>J2 – J5</td><td>Membros (até 4 jogadores adicionais)</td></tr>
+      </tbody>
+    </table>
+    <ul class="reg-list" style="margin-top:1rem">
+      <li>Mínimo <strong>[X] jogadores</strong> e máximo <strong>5 jogadores</strong> por equipe</li>
       <li>Mínimo <strong>3 participantes com vínculo ativo</strong> com a Univates (graduação, pós, técnico ou extensão)</li>
-      <li>Os demais podem ser ex-alunos ou convidados</li>
       <li>Jogadores não podem transitar entre equipes após inscrição</li>
-      <li>Composição não pode ser alterada após encerramento das inscrições, exceto uso do reserva</li>
+      <li>Substituições após encerramento das inscrições estão sujeitas à aprovação da organização</li>
     </ul>
   </div>
 
@@ -860,34 +951,9 @@ footer a { color: var(--blue-bright); text-decoration: none; }
     </ul>
   </div>
 
-  <div class="panel reveal">
-    <div class="panel-title">Valores & Processo</div>
-    <ul class="reg-list">
-      <li>Período: <strong>[DATA INÍCIO]</strong> até <strong>[DATA FIM]</strong></li>
-      <li>Valor: <strong style="color:var(--gold)">R$ 20,00 por jogador</strong> — PIX ao responsável financeiro do DATI com comprovante</li>
-      <li>Máximo <strong>16 equipes</strong>, por ordem de inscrição com pagamento confirmado</li>
-      <li>Menos de <strong>8 equipes inscritas</strong> pode resultar em cancelamento ou reformatação</li>
-      <li>Inscrição realizada pelo <strong>capitão da equipe</strong> via formulário oficial</li>
-      <li><strong>Free Agents</strong> podem se inscrever individualmente para matchmaking</li>
-    </ul>
-  </div>
-
-  <div class="panel reveal">
-    <div class="panel-title">Dados Necessários na Inscrição</div>
-    <div class="code-block">
-<span class="cmt">// Dados obrigatórios por jogador</span>
-{
-  <span class="kw">equipe</span>: <span class="str">"Nome único da equipe"</span>,
-  <span class="kw">capitan</span>: {
-    <span class="kw">nome</span>: <span class="str">"Nome completo"</span>,
-    <span class="kw">email</span>: <span class="str">"email@universo.univates.br"</span>,
-    <span class="kw">steam_profile</span>: <span class="str">"https://steamcommunity.com/..."</span>,
-    <span class="kw">faceit_profile</span>: <span class="str">"https://faceit.com/..."</span>
-  },
-  <span class="kw">jogadores</span>: <span class="val">[ /* mesmos campos × 4 jogadores */ ]</span>,
-  <span class="kw">reserva</span>: <span class="val">null</span> <span class="cmt">// opcional — até 48h antes</span>
-}
-    </div>
+  <div style="margin-top:1.5rem;padding:1rem 1.4rem;background:rgba(26,111,212,.07);border:1px solid var(--border2);border-left:3px solid var(--blue)">
+    <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.9rem;color:var(--blue-bright);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem">// Prazo de Inscrição</p>
+    <p style="font-size:.9rem">Inscrições abertas até <strong style="color:var(--silver)">[DATA LIMITE]</strong>. Equipes com pagamentos pendentes após o prazo serão desclassificadas sem direito a reembolso.</p>
   </div>
 </section>
 
