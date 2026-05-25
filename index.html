@@ -767,42 +767,149 @@ footer a { color: var(--blue-bright); text-decoration: none; }
 }
 .footer-logos img { height: 38px; width: auto; opacity: .55; filter: drop-shadow(0 0 6px rgba(59,142,245,.35)); }
 
-/* ── COUNTDOWN ── */
-.hero-countdown {
+/* ── SURREAL COUNTDOWN ── */
+.countdown-hero {
+  margin: 2rem auto 0;
+  text-align: center;
+  opacity: 0;
+  animation: fadeUp .6s .9s forwards;
+}
+.cth-top-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .65rem;
+  letter-spacing: .5em;
+  color: var(--blue-bright);
+  margin-bottom: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .8rem;
+}
+.cth-top-label::before,
+.cth-top-label::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--blue-bright));
+}
+.cth-top-label::after {
+  background: linear-gradient(90deg, var(--blue-bright), transparent);
+}
+.cth-display {
   display: flex;
   align-items: flex-start;
-  gap: .4rem;
   justify-content: center;
-  margin-top: 2.2rem;
-  opacity: 0;
-  animation: fadeUp .6s 1s forwards;
+  gap: clamp(.2rem, 1.2vw, .7rem);
 }
-.cd-unit {
+.cth-unit {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: .2rem;
-  min-width: 52px;
+  gap: .6rem;
 }
-.cd-val {
+.cth-ring-wrap {
+  position: relative;
+  width:  clamp(74px, 13vw, 132px);
+  height: clamp(74px, 13vw, 132px);
+}
+.cth-ring-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1px solid rgba(59,142,245,.1);
+  pointer-events: none;
+}
+.cth-ring-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,          transparent 2px,
+    rgba(0,0,0,.05) 2px,  rgba(0,0,0,.05) 4px
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+.cth-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  overflow: visible;
+}
+.cth-ring-bg {
+  fill: none;
+  stroke: rgba(59,142,245,.08);
+  stroke-width: 1.5;
+}
+.cth-ring-fill {
+  fill: none;
+  stroke: var(--cyan);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 339.3;
+  stroke-dashoffset: 339.3;
+  transition: stroke-dashoffset 1s cubic-bezier(.23,1,.32,1);
+  filter: drop-shadow(0 0 5px rgba(0,229,255,.75));
+}
+.cth-unit.ticking .cth-ring-fill {
+  filter: drop-shadow(0 0 12px rgba(0,229,255,1)) drop-shadow(0 0 22px rgba(0,229,255,.45));
+}
+.cth-val-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 50%;
+  z-index: 1;
+}
+.cth-val {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 2.4rem;
+  font-size: clamp(1.6rem, 5vw, 3.6rem);
   line-height: 1;
   color: var(--white);
-  text-shadow: 0 0 18px rgba(0,229,255,.5), 0 0 40px rgba(0,229,255,.15);
-  letter-spacing: .05em;
+  text-shadow: 0 0 22px rgba(0,229,255,.55), 0 0 55px rgba(0,229,255,.12);
+  letter-spacing: .02em;
 }
-.cd-label {
+.cth-val.ticking {
+  animation: cth-slot .38s cubic-bezier(.23,1,.32,1) both;
+}
+@keyframes cth-slot {
+  0%   { transform: translateY(-14px); opacity: 0; }
+  45%  { transform: translateY(3px);   opacity: 1; }
+  70%  { transform: translateY(-1px); }
+  100% { transform: translateY(0);     opacity: 1; }
+}
+.cth-unit.glitch .cth-val {
+  text-shadow: -4px 0 rgba(0,229,255,.9), 4px 0 rgba(255,59,59,.9), 0 0 22px rgba(0,229,255,.55);
+  animation: cth-glitch .18s steps(2) 3;
+}
+@keyframes cth-glitch {
+  0%   { transform: translate(-2px,  1px); }
+  33%  { transform: translate( 2px, -1px); }
+  66%  { transform: translate(-1px,  2px); }
+  100% { transform: translate(0, 0); }
+}
+.cth-lbl {
   font-family: 'Share Tech Mono', monospace;
-  font-size: .52rem;
+  font-size: clamp(.42rem, 1vw, .58rem);
+  letter-spacing: .4em;
   color: var(--text-muted);
-  letter-spacing: .3em;
 }
-.cd-sep {
+.cth-sep {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 2rem;
+  font-size: clamp(1.4rem, 4.5vw, 3rem);
   color: var(--blue-bright);
-  line-height: 1.1;
+  opacity: .65;
+  margin-bottom: 1.5rem;
+  align-self: center;
   animation: blink-sep 1s step-start infinite;
 }
 @keyframes blink-sep { 50% { opacity: 0; } }
@@ -860,24 +967,76 @@ footer a { color: var(--blue-bright); text-decoration: none; }
   <div class="hero-corner hero-corner--br"></div>
   <div class="hero-inner">
     <p class="hero-eyebrow">DATI — Univates &nbsp;|&nbsp; Campeonato Oficial</p>
-    <h1 class="hero-title" data-text="TECH STRIKE">
-      <span class="tech-word">TECH</span><span class="strike">STRIKE</span>
-    </h1>
-    <p class="hero-sub">Counter‑Strike 2 &nbsp;·&nbsp; Univates</p>
-    <div class="hero-badge">REGULAMENTO OFICIAL</div>
 
-    <!-- Countdown -->
-    <div class="hero-countdown" id="hero-countdown">
-      <div class="cd-unit"><span class="cd-val" id="cd-days">--</span><span class="cd-label">DIAS</span></div>
-      <span class="cd-sep">:</span>
-      <div class="cd-unit"><span class="cd-val" id="cd-hours">--</span><span class="cd-label">HRS</span></div>
-      <span class="cd-sep">:</span>
-      <div class="cd-unit"><span class="cd-val" id="cd-mins">--</span><span class="cd-label">MIN</span></div>
-      <span class="cd-sep">:</span>
-      <div class="cd-unit"><span class="cd-val" id="cd-secs">--</span><span class="cd-label">SEG</span></div>
+    <!-- Surreal Countdown -->
+    <div class="countdown-hero" id="countdown-hero">
+      <p class="cth-top-label">COMEÇA EM</p>
+      <div class="cth-display">
+
+        <div class="cth-unit">
+          <div class="cth-ring-wrap">
+            <svg class="cth-ring" viewBox="0 0 120 120">
+              <circle class="cth-ring-bg" cx="60" cy="60" r="54"/>
+              <circle class="cth-ring-fill" id="ring-days" cx="60" cy="60" r="54"/>
+            </svg>
+            <div class="cth-val-wrap">
+              <span class="cth-val" id="cth-val-days">--</span>
+            </div>
+          </div>
+          <span class="cth-lbl">DIAS</span>
+        </div>
+
+        <span class="cth-sep">:</span>
+
+        <div class="cth-unit">
+          <div class="cth-ring-wrap">
+            <svg class="cth-ring" viewBox="0 0 120 120">
+              <circle class="cth-ring-bg" cx="60" cy="60" r="54"/>
+              <circle class="cth-ring-fill" id="ring-hours" cx="60" cy="60" r="54"/>
+            </svg>
+            <div class="cth-val-wrap">
+              <span class="cth-val" id="cth-val-hours">--</span>
+            </div>
+          </div>
+          <span class="cth-lbl">HRS</span>
+        </div>
+
+        <span class="cth-sep">:</span>
+
+        <div class="cth-unit">
+          <div class="cth-ring-wrap">
+            <svg class="cth-ring" viewBox="0 0 120 120">
+              <circle class="cth-ring-bg" cx="60" cy="60" r="54"/>
+              <circle class="cth-ring-fill" id="ring-mins" cx="60" cy="60" r="54"/>
+            </svg>
+            <div class="cth-val-wrap">
+              <span class="cth-val" id="cth-val-mins">--</span>
+            </div>
+          </div>
+          <span class="cth-lbl">MIN</span>
+        </div>
+
+        <span class="cth-sep">:</span>
+
+        <div class="cth-unit">
+          <div class="cth-ring-wrap">
+            <svg class="cth-ring" viewBox="0 0 120 120">
+              <circle class="cth-ring-bg" cx="60" cy="60" r="54"/>
+              <circle class="cth-ring-fill" id="ring-secs" cx="60" cy="60" r="54"/>
+            </svg>
+            <div class="cth-val-wrap">
+              <span class="cth-val" id="cth-val-secs">--</span>
+            </div>
+          </div>
+          <span class="cth-lbl">SEG</span>
+        </div>
+
+      </div>
     </div>
 
-<p style="font-family:'Share Tech Mono',monospace;font-size:.68rem;color:var(--text-muted);letter-spacing:.15em;margin-top:1.2rem;opacity:0;animation:fadeUp .5s 1.5s forwards">
+    <p class="hero-sub" style="margin-top:1.6rem">Counter‑Strike 2 &nbsp;·&nbsp; Univates</p>
+    <div class="hero-badge">REGULAMENTO OFICIAL</div>
+    <p style="font-family:'Share Tech Mono',monospace;font-size:.68rem;color:var(--text-muted);letter-spacing:.15em;margin-top:.8rem;opacity:0;animation:fadeUp .5s 1.5s forwards">
       regulamento v1.0 &nbsp;·&nbsp; [DATA A DEFINIR]
     </p>
   </div>
@@ -1499,6 +1658,7 @@ document.addEventListener('keypress', e => {
 // ── HERO TITLE EFFECTS ──
 (function () {
   const titleEl  = document.querySelector('.hero-title');
+  if (!titleEl) return;
   const techEl   = document.querySelector('.hero-title .tech-word');
   const strikeEl = document.querySelector('.hero-title .strike');
   const CHARS    = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@$%^*!?';
@@ -1747,25 +1907,72 @@ if (prizeRow) {
   }());
 }());
 
-// ── COUNTDOWN ──
+// ── SURREAL COUNTDOWN ──
 // Altere EVENT_DATE para a data real do evento
-const EVENT_DATE = new Date('2025-11-15T14:00:00');
+const EVENT_DATE  = new Date('2025-11-15T14:00:00');
+const CTH_CIRC    = 2 * Math.PI * 54; // circunferência do anel SVG (r=54)
+
+function updateRing(id, value, max) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.style.strokeDashoffset = CTH_CIRC * (1 - Math.max(0, Math.min(1, value / max)));
+}
+
+function tickVal(unitEl, valId, newText) {
+  const el = document.getElementById(valId);
+  if (!el || el.textContent === newText) return;
+  el.textContent = newText;
+  el.classList.remove('ticking');
+  void el.offsetWidth;
+  el.classList.add('ticking');
+  if (unitEl) {
+    unitEl.classList.remove('ticking');
+    void unitEl.offsetWidth;
+    unitEl.classList.add('ticking');
+    setTimeout(() => unitEl.classList.remove('ticking'), 450);
+  }
+}
+
 function tickCountdown() {
   const diff = +EVENT_DATE - Date.now();
-  const cd = document.getElementById('hero-countdown');
-  if (!cd) return;
+  const hero = document.getElementById('countdown-hero');
+  if (!hero) return;
   if (diff <= 0) {
-    cd.innerHTML = '<span style="font-family:\'Share Tech Mono\',monospace;color:var(--cyan);letter-spacing:.25em;font-size:.9rem">EVENTO AO VIVO</span>';
+    hero.innerHTML = '<span style="font-family:\'Share Tech Mono\',monospace;color:var(--cyan);letter-spacing:.3em;font-size:.9rem">EVENTO AO VIVO</span>';
     return;
   }
-  const pad = n => String(n).padStart(2, '0');
-  document.getElementById('cd-days').textContent  = pad(Math.floor(diff / 86400000));
-  document.getElementById('cd-hours').textContent = pad(Math.floor((diff % 86400000) / 3600000));
-  document.getElementById('cd-mins').textContent  = pad(Math.floor((diff % 3600000)  / 60000));
-  document.getElementById('cd-secs').textContent  = pad(Math.floor((diff % 60000)    / 1000));
+  const pad   = n => String(n).padStart(2, '0');
+  const days  = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const mins  = Math.floor((diff % 3600000)  / 60000);
+  const secs  = Math.floor((diff % 60000)    / 1000);
+
+  const units = hero.querySelectorAll('.cth-unit');
+  tickVal(units[0], 'cth-val-days',  pad(days));
+  tickVal(units[1], 'cth-val-hours', pad(hours));
+  tickVal(units[2], 'cth-val-mins',  pad(mins));
+  tickVal(units[3], 'cth-val-secs',  pad(secs));
+
+  updateRing('ring-days',  days % 365, 365);
+  updateRing('ring-hours', hours, 24);
+  updateRing('ring-mins',  mins, 60);
+  updateRing('ring-secs',  secs, 60);
 }
 tickCountdown();
 setInterval(tickCountdown, 1000);
+
+// Glitch aleatório em uma unidade a cada ~8s
+(function scheduleGlitch() {
+  setTimeout(() => {
+    const units = document.querySelectorAll('.cth-unit');
+    if (units.length) {
+      const u = units[~~(Math.random() * units.length)];
+      u.classList.add('glitch');
+      setTimeout(() => u.classList.remove('glitch'), 650);
+    }
+    scheduleGlitch();
+  }, 7000 + Math.random() * 5000);
+}());
 
 
 // ── EASTER EGG 7: Sequence de teclas "ace" ──
