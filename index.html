@@ -99,17 +99,17 @@ nav {
 }
 
 .nav-logo {
-  font-family: 'Rajdhani', sans-serif;
-  font-weight: 700;
-  font-size: 1.2rem;
-  color: var(--white);
-  text-decoration: none;
-  letter-spacing: .1em;
   display: flex;
   align-items: center;
-  gap: .5rem;
+  text-decoration: none;
 }
-.nav-logo span { color: var(--blue-bright); }
+.nav-logo img {
+  height: 42px;
+  width: auto;
+  display: block;
+  transition: opacity .2s;
+}
+.nav-logo img:hover { opacity: .85; }
 
 .nav-links {
   display: flex;
@@ -841,7 +841,7 @@ footer a { color: var(--blue-bright); text-decoration: none; }
 
 <!-- NAV -->
 <nav>
-  <a href="#hero" class="nav-logo">TECH<span>STRIKE</span></a>
+  <a href="#hero" class="nav-logo"><img src="logotipo-tech-strike.png" alt="Tech Strike"></a>
   <ul class="nav-links">
     <li><a href="#inscricoes">Inscrições</a></li>
     <li><a href="#formato">Formato</a></li>
