@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <style>
 :root {
   --blue:       #1a6fd4;
@@ -690,6 +691,12 @@ footer a { color: var(--blue-bright); text-decoration: none; }
 }
 #toast.show { opacity: 1; transform: translateY(0); }
 
+/* ── ICONS ── */
+.card-icon svg { width: 1.5rem; height: 1.5rem; }
+.prize-table svg { width: 1rem; height: 1rem; vertical-align: -.15em; }
+#konami-overlay h2 svg { width: 2rem; height: 2rem; vertical-align: middle; margin: 0 .3rem; }
+.accordion-body-inner svg { width: .9rem; height: .9rem; vertical-align: -.1em; }
+
 /* ── CURSOR TRAIL (easter egg) ── */
 .cursor-dot {
   position: fixed;
@@ -811,22 +818,22 @@ footer a { color: var(--blue-bright); text-decoration: none; }
 
   <div class="cards-grid" style="margin-top:2rem">
     <div class="card reveal">
-      <div class="card-icon">🎯</div>
+      <div class="card-icon"><i data-lucide="crosshair"></i></div>
       <div class="card-title">Objetivo</div>
       <div class="card-text">Promover integração entre estudantes via competição saudável em e-sports</div>
     </div>
     <div class="card reveal">
-      <div class="card-icon">🏫</div>
+      <div class="card-icon"><i data-lucide="building-2"></i></div>
       <div class="card-title">Promotor</div>
       <div class="card-text">DATI — Univates, Lajeado/RS</div>
     </div>
     <div class="card reveal">
-      <div class="card-icon">🎮</div>
+      <div class="card-icon"><i data-lucide="gamepad-2"></i></div>
       <div class="card-title">Jogo</div>
       <div class="card-text">Counter‑Strike 2 (CS2) versão oficial Steam</div>
     </div>
     <div class="card reveal">
-      <div class="card-icon">🛡️</div>
+      <div class="card-icon"><i data-lucide="shield"></i></div>
       <div class="card-title">Anti‑Cheat</div>
       <div class="card-text">FACEIT Anti‑Cheat obrigatório e instalado</div>
     </div>
@@ -845,24 +852,24 @@ footer a { color: var(--blue-bright); text-decoration: none; }
     <p style="margin-bottom:1rem">Todas as inscrições são realizadas exclusivamente pelo <strong style="color:var(--silver)">servidor do Discord do evento</strong>. Acesse o canal <strong style="color:var(--cyan)">#como-se-inscrever</strong> e escolha uma das três modalidades:</p>
     <div class="cards-grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr))">
       <div class="card">
-        <div class="card-icon">👑</div>
+        <div class="card-icon"><i data-lucide="crown"></i></div>
         <div class="card-title">Sou Capitão</div>
         <div class="card-text">Crie e lidere sua equipe. O capitão é o primeiro a se inscrever.</div>
       </div>
       <div class="card">
-        <div class="card-icon">🤝</div>
+        <div class="card-icon"><i data-lucide="users"></i></div>
         <div class="card-title">Já tenho equipe</div>
         <div class="card-text">Fui convidado por um capitão e quero entrar na equipe dele.</div>
       </div>
       <div class="card">
-        <div class="card-icon">🔍</div>
+        <div class="card-icon"><i data-lucide="search"></i></div>
         <div class="card-title">Sou Free Agent</div>
         <div class="card-text">Quero participar sem equipe formada e aguardar recrutamento.</div>
       </div>
     </div>
     <div style="margin-top:1.4rem;padding:.9rem 1.2rem;background:rgba(0,229,255,.05);border:1px solid rgba(0,229,255,.2);border-left:3px solid var(--cyan)">
       <p style="font-family:'Share Tech Mono',monospace;font-size:.78rem;color:var(--cyan);letter-spacing:.08em">
-        &gt; Acesse o Discord do evento: <a href="[LINK DO DISCORD]" target="_blank" style="color:var(--blue-bright);text-decoration:underline">[LINK DO DISCORD]</a>
+        &gt; Acesse o Discord do evento: <a href="https://discord.gg/QJyRhdECEV" target="_blank" style="color:var(--blue-bright);text-decoration:underline">https://discord.gg/QJyRhdECEV</a>
       </p>
     </div>
   </div>
@@ -888,7 +895,7 @@ footer a { color: var(--blue-bright); text-decoration: none; }
     </ul>
     <p style="margin-top:.9rem;font-size:.85rem;color:var(--text-dim)">O pedido é encaminhado ao capitão, que pode <strong style="color:var(--green-ok)">aceitar</strong> ou <strong style="color:var(--red)">recusar</strong>. O jogador é notificado por mensagem privada e, em caso de aceitação, recebe as instruções de pagamento.</p>
     <div style="margin-top:.9rem;padding:.7rem 1rem;background:rgba(245,166,35,.06);border-left:2px solid var(--gold)">
-      <p style="font-size:.82rem;color:var(--gold)">⚠ O nome da equipe deve ser informado exatamente como cadastrado pelo capitão, incluindo maiúsculas e espaços.</p>
+      <p style="font-size:.82rem;color:var(--gold)"><i data-lucide="alert-triangle"></i> O nome da equipe deve ser informado exatamente como cadastrado pelo capitão, incluindo maiúsculas e espaços.</p>
     </div>
   </div>
 
@@ -966,32 +973,32 @@ footer a { color: var(--blue-bright); text-decoration: none; }
 
   <div class="cards-grid">
     <div class="card reveal">
-      <div class="card-icon">🖥️</div>
+      <div class="card-icon"><i data-lucide="monitor"></i></div>
       <div class="card-title">Classificatórias</div>
       <div class="card-text">Online via FACEIT. Cada jogador em seu próprio ambiente.</div>
     </div>
     <div class="card reveal">
-      <div class="card-icon">🏟️</div>
+      <div class="card-icon"><i data-lucide="map-pin"></i></div>
       <div class="card-title">Grande Final</div>
       <div class="card-text">Presencial — local a confirmar. Portões às 13h30, início 14h.</div>
     </div>
     <div class="card reveal">
-      <div class="card-icon">⌨️</div>
+      <div class="card-icon"><i data-lucide="keyboard"></i></div>
       <div class="card-title">Periféricos</div>
       <div class="card-text">Cada jogador traz: mouse, teclado, headset, mousepad e gabinete (PC).</div>
     </div>
     <div class="card reveal">
-      <div class="card-icon">🖵</div>
+      <div class="card-icon"><i data-lucide="monitor-check"></i></div>
       <div class="card-title">Monitores</div>
       <div class="card-text">Padronizados pela organização — equidade de hardware garantida.</div>
     </div>
     <div class="card reveal">
-      <div class="card-icon">📡</div>
+      <div class="card-icon"><i data-lucide="wifi"></i></div>
       <div class="card-title">Internet</div>
       <div class="card-text">Conexão dedicada para os PCs dos jogadores na final presencial.</div>
     </div>
     <div class="card reveal">
-      <div class="card-icon">💻</div>
+      <div class="card-icon"><i data-lucide="laptop"></i></div>
       <div class="card-title">Notebooks</div>
       <div class="card-text">Permitidos — monitor externo da organização é obrigatório.</div>
     </div>
@@ -1157,14 +1164,14 @@ footer a { color: var(--blue-bright); text-decoration: none; }
       </tr>
     </thead>
     <tbody>
-      <tr><td>🥇 1º Lugar</td><td>Troféu estilo Major + <span class="badge-award">R$ 400 gift cards Steam</span></td></tr>
-      <tr><td>🥈 2º Lugar</td><td>Medalhas + <span class="badge-award">R$ 200 gift cards Steam</span></td></tr>
-      <tr><td>🥉 3º Lugar</td><td>Medalhas</td></tr>
-      <tr><td>🎯 MVP do Campeonato</td><td>Certificado especial + brinde</td></tr>
-      <tr><td>🔭 Melhor AWPer</td><td>Certificado especial</td></tr>
-      <tr><td>🧠 Melhor IGL</td><td>Certificado especial</td></tr>
-      <tr><td>⚡ Melhor Entry Fragger</td><td>Certificado especial</td></tr>
-      <tr><td>📜 Todos os participantes</td><td>Certificado + horas complementares</td></tr>
+      <tr><td><i data-lucide="trophy"></i> 1º Lugar</td><td>Troféu estilo Major + <span class="badge-award">R$ 400 gift cards Steam</span></td></tr>
+      <tr><td><i data-lucide="award"></i> 2º Lugar</td><td>Medalhas + <span class="badge-award">R$ 200 gift cards Steam</span></td></tr>
+      <tr><td><i data-lucide="medal"></i> 3º Lugar</td><td>Medalhas</td></tr>
+      <tr><td><i data-lucide="target"></i> MVP do Campeonato</td><td>Certificado especial + brinde</td></tr>
+      <tr><td><i data-lucide="crosshair"></i> Melhor AWPer</td><td>Certificado especial</td></tr>
+      <tr><td><i data-lucide="cpu"></i> Melhor IGL</td><td>Certificado especial</td></tr>
+      <tr><td><i data-lucide="zap"></i> Melhor Entry Fragger</td><td>Certificado especial</td></tr>
+      <tr><td><i data-lucide="file-text"></i> Todos os participantes</td><td>Certificado + horas complementares</td></tr>
     </tbody>
   </table>
 </section>
@@ -1293,7 +1300,7 @@ footer a { color: var(--blue-bright); text-decoration: none; }
 
 <!-- KONAMI OVERLAY -->
 <div id="konami-overlay">
-  <h2>☠ MODO DEUS ATIVADO ☠</h2>
+  <h2><i data-lucide="skull"></i> MODO DEUS ATIVADO <i data-lucide="skull"></i></h2>
   <p>↑↑↓↓←→←→ BA — você conhece os clássicos.</p>
   <p style="font-size:.75rem;margin-top:-.8rem;color:var(--text-muted)">Infelizmente isso não vai te ajudar no aim.</p>
   <button onclick="document.getElementById('konami-overlay').classList.remove('show')">FECHAR [ESC]</button>
@@ -1461,6 +1468,9 @@ function animDots() {
   requestAnimationFrame(animDots);
 }
 animDots();
+
+// ── ICONS ──
+lucide.createIcons();
 
 // ── EASTER EGG 6: seção de prêmios — clicar na linha do 1º lugar 5× mostra mensagem ──
 let prizeClick = 0;
