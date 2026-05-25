@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.ico">
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <style>
 :root {
@@ -56,6 +57,20 @@ body::before {
   pointer-events: none;
   z-index: 9999;
   opacity: .25;
+}
+
+/* ── WATERMARK ── */
+#watermark {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(52vw, 460px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: .045;
+  filter: grayscale(1);
+  user-select: none;
 }
 
 /* ── GRID BG ── */
@@ -951,6 +966,8 @@ footer a { color: var(--blue-bright); text-decoration: none; }
 </style>
 </head>
 <body>
+
+<img id="watermark" src="background.png" alt="">
 
 <div id="progress-bar"></div>
 
