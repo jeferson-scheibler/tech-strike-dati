@@ -758,13 +758,7 @@ footer a { color: var(--blue-bright); text-decoration: none; }
 }
 .glitch:hover::before { opacity: .6; }
 
-/* ── LOGOS ── */
-.nav-logo-img {
-  height: 36px;
-  width: auto;
-  display: block;
-}
-
+/* ── FOOTER LOGOS ── */
 .footer-logos {
   display: flex;
   align-items: center;
@@ -772,6 +766,124 @@ footer a { color: var(--blue-bright); text-decoration: none; }
   margin-bottom: .8rem;
 }
 .footer-logos img { height: 38px; width: auto; opacity: .55; filter: drop-shadow(0 0 6px rgba(59,142,245,.35)); }
+
+/* ── COUNTDOWN ── */
+.hero-countdown {
+  display: flex;
+  align-items: flex-start;
+  gap: .4rem;
+  justify-content: center;
+  margin-top: 2.2rem;
+  opacity: 0;
+  animation: fadeUp .6s 1s forwards;
+}
+.cd-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .2rem;
+  min-width: 52px;
+}
+.cd-val {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--white);
+  text-shadow: 0 0 18px rgba(0,229,255,.5), 0 0 40px rgba(0,229,255,.15);
+  letter-spacing: .05em;
+}
+.cd-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .52rem;
+  color: var(--text-muted);
+  letter-spacing: .3em;
+}
+.cd-sep {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 2rem;
+  color: var(--blue-bright);
+  line-height: 1.1;
+  animation: blink-sep 1s step-start infinite;
+}
+@keyframes blink-sep { 50% { opacity: 0; } }
+
+/* ── SPOTS BAR ── */
+.hero-spots {
+  margin-top: 1.2rem;
+  text-align: center;
+  opacity: 0;
+  animation: fadeUp .5s 1.3s forwards;
+}
+.hero-spots-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .68rem;
+  color: var(--text-dim);
+  letter-spacing: .15em;
+}
+.hero-spots-label strong { color: var(--blue-bright); }
+.spots-bar {
+  width: 180px;
+  height: 2px;
+  background: var(--border2);
+  margin: .5rem auto 0;
+  position: relative;
+  overflow: hidden;
+}
+.spots-fill {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  background: linear-gradient(90deg, var(--blue), var(--cyan));
+  box-shadow: 0 0 8px rgba(0,229,255,.5);
+  animation: spots-grow .9s 1.5s ease-out both;
+}
+@keyframes spots-grow { from { width: 0 !important; } }
+
+/* ── KILL FEED ── */
+#kill-feed {
+  position: fixed;
+  top: 72px;
+  right: 1rem;
+  z-index: 9000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: .3rem;
+  pointer-events: none;
+}
+.kf-entry {
+  background: rgba(2,11,24,.88);
+  border: 1px solid rgba(59,142,245,.18);
+  border-right: 2px solid var(--blue-bright);
+  padding: .3rem .75rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .68rem;
+  color: var(--text-dim);
+  letter-spacing: .04em;
+  opacity: 0;
+  transform: translateX(16px);
+  transition: opacity .3s ease, transform .3s ease;
+  white-space: nowrap;
+}
+.kf-entry.show { opacity: 1; transform: translateX(0); }
+
+/* ── PANEL HOVER NEON ── */
+.panel {
+  transition: transform .2s ease, border-left-color .2s ease, box-shadow .2s ease;
+}
+.panel:hover {
+  transform: translateX(5px);
+  border-left-color: var(--blue-bright);
+  box-shadow: -6px 0 28px rgba(59,142,245,.2), inset 0 0 40px rgba(59,142,245,.03);
+}
+
+/* ── SECTION TITLE NEON PULSE ── */
+.section-title.visible .accent {
+  animation: accent-neon 5s ease-in-out infinite 1s;
+}
+@keyframes accent-neon {
+  0%, 100% { text-shadow: none; }
+  50%       { text-shadow: 0 0 20px rgba(59,142,245,.55), 0 0 50px rgba(59,142,245,.18); }
+}
 
 /* ── RESPONSIVE ── */
 @media (max-width: 600px) {
@@ -787,7 +899,7 @@ footer a { color: var(--blue-bright); text-decoration: none; }
 
 <!-- NAV -->
 <nav>
-  <a href="#hero" class="nav-logo"><img src="logotipo-tech-strike.png" alt="Tech Strike" class="nav-logo-img"></a>
+  <a href="#hero" class="nav-logo">TECH<span>STRIKE</span></a>
   <ul class="nav-links">
     <li><a href="#inscricoes">Inscrições</a></li>
     <li><a href="#formato">Formato</a></li>
@@ -811,9 +923,28 @@ footer a { color: var(--blue-bright); text-decoration: none; }
     </h1>
     <p class="hero-sub">Counter‑Strike 2 &nbsp;·&nbsp; Univates</p>
     <div class="hero-badge">REGULAMENTO OFICIAL</div>
-    <br>
-    <p style="font-family:'Share Tech Mono',monospace;font-size:.75rem;color:var(--text-muted);letter-spacing:.15em;" class="hero-eyebrow" style="animation-delay:.9s">
-      versão 1.0 &nbsp;·&nbsp; [DATA A DEFINIR]
+
+    <!-- Countdown -->
+    <div class="hero-countdown" id="hero-countdown">
+      <div class="cd-unit"><span class="cd-val" id="cd-days">--</span><span class="cd-label">DIAS</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit"><span class="cd-val" id="cd-hours">--</span><span class="cd-label">HRS</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit"><span class="cd-val" id="cd-mins">--</span><span class="cd-label">MIN</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit"><span class="cd-val" id="cd-secs">--</span><span class="cd-label">SEG</span></div>
+    </div>
+
+    <!-- Vagas restantes -->
+    <div class="hero-spots">
+      <p class="hero-spots-label">
+        <strong id="spots-taken">0</strong> / <strong id="spots-total">16</strong> EQUIPES INSCRITAS
+      </p>
+      <div class="spots-bar"><div class="spots-fill" id="spots-fill"></div></div>
+    </div>
+
+    <p style="font-family:'Share Tech Mono',monospace;font-size:.68rem;color:var(--text-muted);letter-spacing:.15em;margin-top:1.2rem;opacity:0;animation:fadeUp .5s 1.5s forwards">
+      regulamento v1.0 &nbsp;·&nbsp; [DATA A DEFINIR]
     </p>
   </div>
   <div class="hero-scroll">
@@ -1324,6 +1455,9 @@ footer a { color: var(--blue-bright); text-decoration: none; }
   <button onclick="document.getElementById('konami-overlay').classList.remove('show')">FECHAR [ESC]</button>
 </div>
 
+<!-- KILL FEED -->
+<div id="kill-feed"></div>
+
 <!-- TOAST -->
 <div id="toast"></div>
 
@@ -1559,7 +1693,6 @@ if (prizeRow) {
 
 // ── CURSOR: CROSSHAIR CS2 ──
 (function () {
-  // Oculta cursor padrão em toda a página
   const s = document.createElement('style');
   s.textContent = '*, *::before, *::after { cursor: none !important; }';
   document.head.appendChild(s);
@@ -1575,65 +1708,167 @@ if (prizeRow) {
   window.addEventListener('resize', resize);
 
   let mx = -999, my = -999, pvx = 0, pvy = 0;
-  let spread = 0, clickSpread = 0;
-  let clicking = false, visible = false;
+  let spread = 0, clickSpread = 0, clicking = false, visible = false;
+  const ripples = [];  // anéis que expandem no clique
+  const ghosts  = [];  // marcadores de impacto que ficam para trás
 
   document.addEventListener('mousemove', e => {
     pvx = e.clientX - mx; pvy = e.clientY - my;
-    mx = e.clientX; my = e.clientY;
-    visible = true;
+    mx = e.clientX; my = e.clientY; visible = true;
   });
   document.addEventListener('mouseleave', () => { visible = false; });
   document.addEventListener('mouseenter', () => { visible = true; });
-  document.addEventListener('mousedown', () => { clicking = true;  clickSpread = 8; });
-  document.addEventListener('mouseup',   () => { clicking = false; });
+  document.addEventListener('mousedown', e => {
+    clicking = true; clickSpread = 9;
+    ripples.push({ x: e.clientX, y: e.clientY, r: 0, a: .7, spd: 4 });
+    ghosts.push({ x: e.clientX, y: e.clientY, a: .4 });
+    if (ghosts.length > 6) ghosts.shift();
+  });
+  document.addEventListener('mouseup', () => { clicking = false; });
 
   function frame() {
     ctx.clearRect(0, 0, W, H);
 
+    // Ghost markers (impactos anteriores desfazendo)
+    for (let i = ghosts.length - 1; i >= 0; i--) {
+      const g = ghosts[i]; g.a -= .0035;
+      if (g.a <= 0) { ghosts.splice(i, 1); continue; }
+      const gl = 5, gg = 3;
+      ctx.lineWidth = 1; ctx.strokeStyle = `rgba(0,229,255,${g.a})`;
+      ctx.beginPath();
+      ctx.moveTo(g.x-gg-gl, g.y); ctx.lineTo(g.x-gg, g.y);
+      ctx.moveTo(g.x+gg, g.y);    ctx.lineTo(g.x+gg+gl, g.y);
+      ctx.moveTo(g.x, g.y-gg-gl); ctx.lineTo(g.x, g.y-gg);
+      ctx.moveTo(g.x, g.y+gg);    ctx.lineTo(g.x, g.y+gg+gl);
+      ctx.stroke();
+    }
+
+    // Ripple rings expandindo
+    for (let i = ripples.length - 1; i >= 0; i--) {
+      const rp = ripples[i];
+      rp.r += rp.spd; rp.spd *= .92; rp.a *= .85;
+      if (rp.a < .01) { ripples.splice(i, 1); continue; }
+      ctx.beginPath();
+      ctx.arc(rp.x, rp.y, rp.r, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(0,229,255,${rp.a})`;
+      ctx.lineWidth = 1.2; ctx.stroke();
+    }
+
     if (!visible) { requestAnimationFrame(frame); return; }
 
-    // Physics de spread baseado em velocidade
-    pvx *= 0.72; pvy *= 0.72;
-    const vel = Math.hypot(pvx, pvy);
-    spread += (vel * 0.9 - spread) * 0.14;
+    pvx *= .72; pvy *= .72;
+    spread += (Math.hypot(pvx, pvy) * .9 - spread) * .14;
     spread  = Math.max(0, Math.min(spread, 16));
-    if (clickSpread > 0) { spread = Math.max(spread, clickSpread); clickSpread *= 0.75; }
+    if (clickSpread > 0) { spread = Math.max(spread, clickSpread); clickSpread *= .75; }
 
-    const gap = 4 + spread;   // distância do centro até o início de cada linha
-    const len = 10;            // comprimento de cada linha
-    const al  = clicking ? 1 : 0.92;
-
+    const gap = 4 + spread, len = 10, al = clicking ? 1 : .92;
     const lines = [
-      [mx, my - gap,       mx, my - gap - len],   // cima
-      [mx, my + gap,       mx, my + gap + len],   // baixo
-      [mx - gap,     my,   mx - gap - len,  my],  // esquerda
-      [mx + gap,     my,   mx + gap + len,  my],  // direita
+      [mx, my-gap,   mx, my-gap-len],
+      [mx, my+gap,   mx, my+gap+len],
+      [mx-gap, my,   mx-gap-len, my],
+      [mx+gap, my,   mx+gap+len, my],
     ];
 
-    // Sombra (garante visibilidade em qualquer fundo)
     ctx.lineCap = 'butt';
-    ctx.lineWidth = 3.5;
-    ctx.strokeStyle = 'rgba(0,0,0,.75)';
+    ctx.lineWidth = 3.5; ctx.strokeStyle = 'rgba(0,0,0,.75)';
     lines.forEach(([x1,y1,x2,y2]) => { ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke(); });
 
-    // Mira — ciano, alinhado ao tema do site
-    ctx.lineWidth = 1.5;
-    ctx.strokeStyle = `rgba(0,229,255,${al})`;
+    ctx.lineWidth = 1.5; ctx.strokeStyle = `rgba(0,229,255,${al})`;
     lines.forEach(([x1,y1,x2,y2]) => { ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke(); });
 
-    // Ponto central (aparece quando parado ou clicando)
     if (clicking || spread < 1.5) {
+      ctx.beginPath(); ctx.arc(mx, my, 1.5, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(0,229,255,${al})`; ctx.fill();
+    }
+
+    // Flash de disparo: linhas longas e finas que pulsam no click
+    if (clicking) {
+      ctx.lineWidth = .5; ctx.strokeStyle = 'rgba(0,229,255,.22)';
       ctx.beginPath();
-      ctx.arc(mx, my, 1.5, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(0,229,255,${al})`;
-      ctx.fill();
+      ctx.moveTo(mx-24, my); ctx.lineTo(mx+24, my);
+      ctx.moveTo(mx, my-24); ctx.lineTo(mx, my+24);
+      ctx.stroke();
     }
 
     requestAnimationFrame(frame);
   }
   frame();
 }());
+
+// ── HERO PARALLAX ──
+(function () {
+  const hero  = document.getElementById('hero');
+  const glow  = hero.querySelector('.hero-glow');
+  const inner = hero.querySelector('.hero-inner');
+  let tx = 0, ty = 0, cx = 0, cy = 0;
+  hero.addEventListener('mousemove', e => {
+    const r = hero.getBoundingClientRect();
+    tx = (e.clientX - r.left - r.width  / 2) / r.width;
+    ty = (e.clientY - r.top  - r.height / 2) / r.height;
+  });
+  hero.addEventListener('mouseleave', () => { tx = 0; ty = 0; });
+  (function tick() {
+    cx += (tx - cx) * .055; cy += (ty - cy) * .055;
+    glow.style.transform  = `translate(${cx * 70}px, ${cy * 50}px)`;
+    inner.style.transform = `translate(${cx * 10}px, ${cy * 7}px)`;
+    requestAnimationFrame(tick);
+  }());
+}());
+
+// ── COUNTDOWN ──
+// Altere EVENT_DATE para a data real do evento
+const EVENT_DATE = new Date('2025-11-15T14:00:00');
+function tickCountdown() {
+  const diff = +EVENT_DATE - Date.now();
+  const cd = document.getElementById('hero-countdown');
+  if (!cd) return;
+  if (diff <= 0) {
+    cd.innerHTML = '<span style="font-family:\'Share Tech Mono\',monospace;color:var(--cyan);letter-spacing:.25em;font-size:.9rem">EVENTO AO VIVO</span>';
+    return;
+  }
+  const pad = n => String(n).padStart(2, '0');
+  document.getElementById('cd-days').textContent  = pad(Math.floor(diff / 86400000));
+  document.getElementById('cd-hours').textContent = pad(Math.floor((diff % 86400000) / 3600000));
+  document.getElementById('cd-mins').textContent  = pad(Math.floor((diff % 3600000)  / 60000));
+  document.getElementById('cd-secs').textContent  = pad(Math.floor((diff % 60000)    / 1000));
+}
+tickCountdown();
+setInterval(tickCountdown, 1000);
+
+// ── VAGAS ──
+// Altere TAKEN e TOTAL conforme inscrições reais
+const TAKEN = 7, TOTAL = 16;
+document.getElementById('spots-taken').textContent = TAKEN;
+document.getElementById('spots-total').textContent = TOTAL;
+document.getElementById('spots-fill').style.width  = (TAKEN / TOTAL * 100) + '%';
+
+// ── KILL FEED ──
+const KF_MSGS = [
+  '<span style="color:var(--cyan)">AWPer</span> &nbsp;·&nbsp; no-scope em mid',
+  '<span style="color:var(--gold)">Capitão</span> &nbsp;·&nbsp; 1v3 clutch em Mirage',
+  '<span style="color:var(--green-ok)">Entry</span> &nbsp;·&nbsp; rush B sem parar',
+  '<span style="color:var(--blue-bright)">IGL</span> &nbsp;·&nbsp; execute A perfeito',
+  '<span style="color:var(--cyan)">Lurker</span> &nbsp;·&nbsp; flank confirmado',
+  '<span style="color:var(--red)">CT</span> &nbsp;·&nbsp; defuse com 0.3s',
+  '<span style="color:var(--silver)">Free Agent</span> &nbsp;·&nbsp; recrutado pela equipe #3',
+  '<span style="color:var(--gold)">Capitão</span> &nbsp;·&nbsp; vaga preenchida',
+];
+function spawnKF() {
+  const feed = document.getElementById('kill-feed');
+  if (!feed) return;
+  const el = document.createElement('div');
+  el.className = 'kf-entry';
+  el.innerHTML = KF_MSGS[~~(Math.random() * KF_MSGS.length)];
+  feed.appendChild(el);
+  requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('show')));
+  setTimeout(() => {
+    el.classList.remove('show');
+    setTimeout(() => el.remove(), 400);
+  }, 3800);
+  while (feed.children.length > 4) feed.removeChild(feed.firstChild);
+  setTimeout(spawnKF, 3000 + Math.random() * 5000);
+}
+setTimeout(spawnKF, 6000);
 
 // ── EASTER EGG 7: Sequence de teclas "ace" ──
 let aceBuffer = '';
